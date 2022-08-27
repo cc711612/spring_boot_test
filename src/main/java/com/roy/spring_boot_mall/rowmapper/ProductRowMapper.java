@@ -1,5 +1,6 @@
 package com.roy.spring_boot_mall.rowmapper;
 
+import com.roy.spring_boot_mall.constant.ProductCategory;
 import com.roy.spring_boot_mall.model.Product;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -13,7 +14,7 @@ public class ProductRowMapper implements RowMapper<Product> {
 
         product.setProductId(resultSet.getInt("product_id"));
         product.setProductName(resultSet.getString("product_name"));
-        product.setCategory(resultSet.getString("category"));
+        product.setCategory(ProductCategory.valueOf(resultSet.getString("category")));
         product.setDescription(resultSet.getString("description"));
         product.setPrice(resultSet.getInt("price"));
         product.setImageUrl(resultSet.getString("image_url"));
