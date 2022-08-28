@@ -2,6 +2,7 @@ package com.roy.spring_boot_mall.service.Impl;
 
 import com.roy.spring_boot_mall.constant.ProductCategory;
 import com.roy.spring_boot_mall.dao.ProductDao;
+import com.roy.spring_boot_mall.dto.ProductQueryParams;
 import com.roy.spring_boot_mall.dto.ProductRequest;
 import com.roy.spring_boot_mall.model.Product;
 import com.roy.spring_boot_mall.service.ProductService;
@@ -38,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getList(ProductCategory productCategory,String search) {
-        return productDao.getList(productCategory,search);
+    public List<Product> getList(ProductQueryParams productQueryParams) {
+        return productDao.getList(productQueryParams);
     }
 }
