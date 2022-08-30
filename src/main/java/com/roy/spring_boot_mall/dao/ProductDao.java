@@ -10,10 +10,14 @@ import java.util.List;
 public interface ProductDao {
 
     List<Product> getList(ProductQueryParams productQueryParams);
-    Product getProductById(Integer productId);
-    Integer createProduct (ProductRequest productRequest);
 
-    void updateProduct(Integer productId , ProductRequest productRequest);
+    Integer getProductCount(ProductQueryParams productQueryParams);
+
+    Product getProductById(Integer productId);
+
+    Integer createProduct(ProductRequest productRequest);
+
+    void updateProduct(Integer productId, ProductRequest productRequest);
 
     void deleteProductById(Integer productId);
 

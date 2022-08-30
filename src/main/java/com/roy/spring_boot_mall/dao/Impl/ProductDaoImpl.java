@@ -46,7 +46,24 @@ public class ProductDaoImpl implements ProductDao {
 
         return productList;
     }
+    @Override
+    public Integer getProductCount(ProductQueryParams productQueryParams) {
+        String sql = "SELECT count(*) FROM product WHERE 1=1";
 
+        Map<String, Object> map = new HashMap<>();
+        if (productQueryParams.getProductCategory() != null) {
+            sql += " AND `category` = :category";
+            map.put("category", productQueryParams.getProductCategory().name());
+        }
+        if (productQueryParams.getSearch() != null) {
+            sql += " AND `product_name` LIKE :search";
+            map.put("search", "%" + productQueryParams.getSearch() + "%");
+        }
+        sql += " ORDER BY " + productQueryParams.getOrderBy() + " " + productQueryParams.getSort() +
+                " limit " + productQueryParams.getLimit() + " offset " + productQueryParams.getOffset();
+
+        return namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
+    }
     @Override
     public Product getProductById(Integer productId) {
         String sql = "SELECT product_id ,product_name, category, image_url, price, stock, description, created_date, last_modified_date FROM product WHERE product_id = :productId";
